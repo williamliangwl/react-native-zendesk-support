@@ -7,7 +7,7 @@ This has only been tested to work with React Native 0.47, probably works in earl
 
 ## Getting started
 
-Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk).
+Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk) (Gradle).
 
 Don't forget to link the npm to React Native!
 ```
