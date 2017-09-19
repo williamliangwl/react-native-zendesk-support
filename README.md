@@ -9,12 +9,32 @@ This has only been tested to work with React Native 0.47, probably works in earl
 
 Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
 
-## Usage (must do)
-
-Link the package to React Native
+### Installing via RNPM
 ```
 react-native link react-native-zendesk-support
 ```
+
+### Installing via Cocoapods
+
+Add the following line to your Podfile:
+
+```
+  pod 'react-native-zendesk-support', :path => '../node_modules/react-native-zendesk-support'
+```
+
+Then add this post-install hook:
+
+```
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        target.build_settings(config.name)['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+      end
+    end
+  end
+```
+
+## Usage
 
 Import the module
 ```js
