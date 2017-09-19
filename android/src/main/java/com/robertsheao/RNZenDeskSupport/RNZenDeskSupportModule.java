@@ -42,6 +42,16 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void setupIdentity(ReadableMap identity) {
+    Identity zdIdentity = new AnonymousIdentity.Builder()
+      .withEmailIdentifier(identity.getString("customerEmail"))
+      .withNameIdentifier(identity.getString("customerName"))
+      .build();
+
+    ZendeskConfig.INSTANCE.setIdentity(zdIdentity);
+  }
+
+  @ReactMethod
   public void showHelpCenterWithOptions(ReadableMap options) {
     Boolean showConversationsMenuButton = true;
     Boolean articleVotingEnabled = true;

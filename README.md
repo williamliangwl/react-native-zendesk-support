@@ -47,6 +47,15 @@ ZenDeskSupport.supportHistory(identity)
 
 ### Help Center
 
+Before calling Help Center, you need to define an identity. This should be the same identity you pass into `callSupport` and `supportIdentity`. The `callSupport` and `supportIdentity` methods will be changed in the next major version to not require identity passed into them.
+```js
+const identity = {
+  customerEmail: 'foo@bar.com',
+  customerName: 'Foo Bar'
+}
+ZenDeskSupport.setupIdentity(identity)
+```
+
 Show help center
 ```js
 ZenDeskSupport.showHelpCenter()
