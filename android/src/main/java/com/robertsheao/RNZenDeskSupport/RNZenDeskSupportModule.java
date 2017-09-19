@@ -211,14 +211,7 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void callSupport(ReadableMap identity, ReadableMap customFields) {
-
-    Identity zdIdentity = new AnonymousIdentity.Builder()
-      .withEmailIdentifier(identity.getString("customerEmail"))
-      .withNameIdentifier(identity.getString("customerName"))
-      .build();
-
-    ZendeskConfig.INSTANCE.setIdentity(zdIdentity);
+  public void callSupport(ReadableMap customFields) {
 
     List<CustomField> fields = new ArrayList<>();
 
@@ -231,11 +224,7 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void supportHistory(ReadableMap identity) {
-    Identity zdIdentity = new AnonymousIdentity.Builder()
-          .withEmailIdentifier(identity.getString("customerEmail"))
-          .withNameIdentifier(identity.getString("customerName"))
-          .build();
+  public void supportHistory() {
     RequestActivity.startActivity(getReactApplicationContext(), null);
   }
 

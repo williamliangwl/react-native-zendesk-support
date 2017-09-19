@@ -7,47 +7,21 @@ This has only been tested to work with React Native 0.47, probably works in earl
 
 ## Getting started
 
-Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk) (Gradle).
+Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
 
-Don't forget to link the npm to React Native!
-```
-react-native link
-```
+## Usage (must do)
 
-## Usage
+Link the package to React Native
+```
+react-native link react-native-zendesk-support
+```
 
 Import the module
 ```js
 import ZenDeskSupport from 'react-native-zendesk-support';
 ```
 
-### Support Tickets
-
-File a ticket
-```js
-const identity = {
-  customerEmail: 'foo@bar.com',
-  customerName: 'Foo Bar'
-}
-
-const customFields = {
-  customFieldId: 'Custom Field Value'
-}
-ZenDeskSupport.callSupport(identity, customFields)
-```
-
-Bring up ticket history
-```js
-const identity = {
-  customerEmail: 'foo@bar.com',
-  customerName: 'Foo Bar'
-}
-ZenDeskSupport.supportHistory(identity)
-```
-
-### Help Center
-
-Before calling Help Center, you need to define an identity. This should be the same identity you pass into `callSupport` and `supportIdentity`. The `callSupport` and `supportIdentity` methods will be changed in the next major version to not require identity passed into them.
+Define an identity
 ```js
 const identity = {
   customerEmail: 'foo@bar.com',
@@ -55,6 +29,24 @@ const identity = {
 }
 ZenDeskSupport.setupIdentity(identity)
 ```
+###### Note: You must define an identity prior to calling any support ticket or help center methods. Suggested places are inside `componentWillMount` or `componentWillReceiveProps`
+
+### Support Tickets
+
+File a ticket
+```js
+const customFields = {
+  customFieldId: 'Custom Field Value'
+}
+ZenDeskSupport.callSupport(customFields)
+```
+
+Bring up ticket history
+```js
+ZenDeskSupport.supportHistory()
+```
+
+### Help Center
 
 Show help center
 ```js

@@ -88,14 +88,11 @@ RCT_EXPORT_METHOD(showLabels:(NSArray *)labels) {
     [self showLabelsWithOptions:labels options:nil];
 }
 
-RCT_EXPORT_METHOD(callSupport:(NSDictionary *)identity customFields:(NSDictionary *)customFields) {
+RCT_EXPORT_METHOD(callSupport:(NSDictionary *)customFields) {
     UIWindow *window=[UIApplication sharedApplication].keyWindow;
     UIViewController *vc = [window rootViewController];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        ZDKAnonymousIdentity *zdIdentity = [ZDKAnonymousIdentity new];
-        zdIdentity.email = [RCTConvert NSString:identity[@"customerEmail"]];
-        zdIdentity.name = [RCTConvert NSString:identity[@"customerName"]];
 
         NSMutableArray *fields = [[NSMutableArray alloc] init];
 
@@ -103,24 +100,17 @@ RCT_EXPORT_METHOD(callSupport:(NSDictionary *)identity customFields:(NSDictionar
             id value = [customFields objectForKey:key];
             [fields addObject: [[ZDKCustomField alloc] initWithFieldId:@(key.intValue) andValue:value]];
         }
-
-        [ZDKConfig instance].userIdentity = zdIdentity;
         [ZDKConfig instance].customTicketFields = fields;
         [ZDKRequests presentRequestCreationWithViewController:vc];
     });
 }
 
-RCT_EXPORT_METHOD(supportHistory:(NSDictionary *)identity){
+RCT_EXPORT_METHOD(supportHistory){
     UIWindow *window=[UIApplication sharedApplication].keyWindow;
     UIViewController *vc = [window rootViewController];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        ZDKAnonymousIdentity *zdIdentity = [ZDKAnonymousIdentity new];
-        zdIdentity.email = [RCTConvert NSString:identity[@"customerEmail"]];
-        zdIdentity.name = [RCTConvert NSString:identity[@"customerName"]];
-        [ZDKConfig instance].userIdentity = zdIdentity;
         [ZDKRequests presentRequestListWithViewController:vc];
-
     });
 }
 @end
