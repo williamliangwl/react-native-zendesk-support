@@ -4,8 +4,14 @@
 //  Created by Patrick O'Connor on 8/30/17.
 //
 
-#import "RNZenDeskSupport.h"
+// RN < 0.40 suppoert
+#if __has_include(<React/RCTBridge.h>)
 #import <React/RCTConvert.h>
+#else
+#import "RCTConvert.h"
+#endif
+
+#import "RNZenDeskSupport.h"
 #import <ZendeskSDK/ZendeskSDK.h>
 @implementation RNZenDeskSupport
 
