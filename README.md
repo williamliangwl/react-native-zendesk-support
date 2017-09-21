@@ -1,5 +1,5 @@
 # react-native-zendesk-support
-React Native bridge to ZenDesk Support SDK on iOS and Android. This currently only supports using the out of the box views the ZenDesk Support SDK provides. At the moment, only anonymous authentication is supported.
+React Native bridge to Zendesk Support SDK on iOS and Android. This currently only supports using the out of the box views the Zendesk Support SDK provides. At the moment, only anonymous authentication is supported.
 
 ## React Native Version Support
 
@@ -41,10 +41,10 @@ repositories {
 }
 ```
 
-### Installing ZenDesk SDK (optional)
-If you'd like to define your `appId`, `zendeskUrl`, and `clientId` inside your iOS and Android project, rather than pass them as params via `ZenDeskSupport.initialize` through this module, you can do so by integrating the ZenDesk Support SDK into your react-native project.
+### Installing Zendesk SDK (optional)
+If you'd like to define your `appId`, `zendeskUrl`, and `clientId` inside your iOS and Android project, rather than pass them as params via `ZendeskSupport.initialize` through this module, you can do so by integrating the Zendesk Support SDK into your react-native project.
 
-Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
+Follow the instructions to install the Zendesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
 
 P.S. This isn't a common use case.
 
@@ -52,19 +52,19 @@ P.S. This isn't a common use case.
 
 Import the module
 ```js
-import ZenDeskSupport from 'react-native-zendesk-support';
+import ZendeskSupport from 'react-native-zendesk-support';
 ```
 
-Initialize ZenDesk
+Initialize Zendesk
 ```js
 const config = {
   appId: 'your_app_id',
   zendeskUrl: 'your_zendesk_url',
   clientId: 'your_client_id'
 }
-ZenDeskSupport.initialize(config)
+ZendeskSupport.initialize(config)
 ```
-###### Note: You must initialize ZenDesk prior to calling setupIdentity. Best place for it would be inside `componentWillMount`
+###### Note: You must initialize Zendesk prior to calling setupIdentity. Best place for it would be inside `componentWillMount`
 
 Define an identity
 ```js
@@ -72,7 +72,7 @@ const identity = {
   customerEmail: 'foo@bar.com',
   customerName: 'Foo Bar'
 }
-ZenDeskSupport.setupIdentity(identity)
+ZendeskSupport.setupIdentity(identity)
 ```
 ###### Note: You must define an identity prior to calling any support ticket or help center methods. Suggested places are inside `componentWillMount` or `componentWillReceiveProps` if your identity details aren't immediately available
 
@@ -83,34 +83,34 @@ File a ticket
 const customFields = {
   customFieldId: 'Custom Field Value'
 }
-ZenDeskSupport.callSupport(customFields)
+ZendeskSupport.callSupport(customFields)
 ```
 
 Bring up ticket history
 ```js
-ZenDeskSupport.supportHistory()
+ZendeskSupport.supportHistory()
 ```
 
 ### Help Center
 
 Show help center
 ```js
-ZenDeskSupport.showHelpCenter()
+ZendeskSupport.showHelpCenter()
 ```
 
 Show categories, e.g., FAQ
 ```js
-ZenDeskSupport.showCategories(['categoryId'])
+ZendeskSupport.showCategories(['categoryId'])
 ```
 
 Show sections, e.g., Account Questions
 ```js
-ZenDeskSupport.showSections(['sectionId'])
+ZendeskSupport.showSections(['sectionId'])
 ```
 
 Show labels, e.g., tacocat
 ```js
-ZenDeskSupport.showLabels(['tacocat'])
+ZendeskSupport.showLabels(['tacocat'])
 ```
 
 #### Options
@@ -122,10 +122,10 @@ const options = {
   showConversationsMenuButton: false,
   withContactUsButtonVisibility: 'OFF'
 }
-ZenDeskSupport.showHelpCenterWithOptions({ options })
-ZenDeskSupport.showCategoriesWithOptions(['categoryId'], { options })
-ZenDeskSupport.showSectionsWithOptions(['sectionId'], { options })
-ZenDeskSupport.showLabelsWithOptions(['tacocat'], { options })
+ZendeskSupport.showHelpCenterWithOptions({ options })
+ZendeskSupport.showCategoriesWithOptions(['categoryId'], { options })
+ZendeskSupport.showSectionsWithOptions(['sectionId'], { options })
+ZendeskSupport.showLabelsWithOptions(['tacocat'], { options })
 ```
 
 ##### articleVotingEnabled _boolean_
