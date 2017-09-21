@@ -17,6 +17,16 @@
 
 RCT_EXPORT_MODULE();
 
+RCT_EXPORT_METHOD(initialize:(NSDictionary *)config){
+    NSString *appId = [RCTConvert NSString:config[@"appId"]];
+    NSString *zendeskUrl = [RCTConvert NSString:config[@"zendeskUrl"]];
+    NSString *clientId = [RCTConvert NSString:config[@"clientId"]];
+    [[ZDKConfig instance]
+     initializeWithAppId:appId
+     zendeskUrl:zendeskUrl
+     clientId:clientId];
+}
+
 RCT_EXPORT_METHOD(setupIdentity:(NSDictionary *)identity){
     dispatch_async(dispatch_get_main_queue(), ^{
         ZDKAnonymousIdentity *zdIdentity = [ZDKAnonymousIdentity new];

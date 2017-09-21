@@ -42,6 +42,14 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void initialize(ReadableMap config) {
+    String appId = config.getString("appId");
+    String zendeskUrl = config.getString("zendeskUrl");
+    String clientId = config.getString("clientId");
+    ZendeskConfig.INSTANCE.init(getReactApplicationContext(), zendeskUrl, appId, clientId);
+  }
+
+  @ReactMethod
   public void setupIdentity(ReadableMap identity) {
     Identity zdIdentity = new AnonymousIdentity.Builder()
       .withEmailIdentifier(identity.getString("customerEmail"))
