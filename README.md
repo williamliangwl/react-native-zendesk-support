@@ -41,12 +41,10 @@ repositories {
 }
 ```
 
-### Installing Zendesk SDK (optional)
+### Installing Zendesk SDK (Optional, Not Common)
 If you'd like to define your `appId`, `zendeskUrl`, and `clientId` inside your iOS and Android project, rather than pass them as params via `ZendeskSupport.initialize` through this module, you can do so by integrating the Zendesk Support SDK into your react-native project.
 
 Follow the instructions to install the Zendesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
-
-P.S. This isn't a common use case.
 
 ## Usage
 
@@ -149,7 +147,6 @@ ZendeskSupport.showLabelsWithOptions(['tacocat'], { options })
 * Disappearing help center category headers on android
 
 ## Upcoming Features
-
 * Authenticate using JWT endpoint
 * Theme support
 * Show article by id
