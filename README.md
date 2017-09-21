@@ -7,14 +7,12 @@ This has only been tested to work with React Native 0.47, probably works in earl
 
 ## Getting started
 
-Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
-
-### Installing via RNPM
+### Installing via RNPM (Common)
 ```
 react-native link react-native-zendesk-support
 ```
 
-### Installing via Cocoapods
+### Installing via Cocoapods (Not Common)
 
 Add the following line to your Podfile:
 
@@ -34,12 +32,39 @@ Then add this post-install hook:
   end
 ```
 
+### Configure Android (Must Do)
+You need to add the following repository to your `android/app/build.gradle` file. If you do not already have a `repositories` section, add it at the root level of the file right before the `dependencies` section
+
+```
+repositories {
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+}
+```
+
+### Installing ZenDesk SDK (optional)
+If you'd like to define your `appId`, `zendeskUrl`, and `clientId` inside your iOS and Android project, rather than pass them as params via `ZenDeskSupport.initialize` through this module, you can do so by integrating the ZenDesk Support SDK into your react-native project.
+
+Follow the instructions to install the ZenDesk Support SDK for [iOS](https://developer.zendesk.com/embeddables/docs/ios/integrate_sdk) and [Android](https://developer.zendesk.com/embeddables/docs/android/integrate_sdk#adding-the-support-sdk-with-gradle) (Gradle).
+
+P.S. This isn't a common use case.
+
 ## Usage
 
 Import the module
 ```js
 import ZenDeskSupport from 'react-native-zendesk-support';
 ```
+
+Initialize ZenDesk
+```js
+const config = {
+  appId: 'your_app_id',
+  zendeskUrl: 'your_zendesk_url',
+  clientId: 'your_client_id'
+}
+ZenDeskSupport.initialize(config)
+```
+###### Note: You must initialize ZenDesk prior to calling setupIdentity. Best place for it would be inside `componentWillMount`
 
 Define an identity
 ```js
@@ -49,7 +74,7 @@ const identity = {
 }
 ZenDeskSupport.setupIdentity(identity)
 ```
-###### Note: You must define an identity prior to calling any support ticket or help center methods. Suggested places are inside `componentWillMount` or `componentWillReceiveProps`
+###### Note: You must define an identity prior to calling any support ticket or help center methods. Suggested places are inside `componentWillMount` or `componentWillReceiveProps` if your identity details aren't immediately available
 
 ### Support Tickets
 
