@@ -76,7 +76,7 @@ ZendeskSupport.setupIdentity(identity)
 
 ### Support Tickets
 
-File a ticket
+#### File a ticket
 ```js
 const customFields = {
   customFieldId: 'Custom Field Value'
@@ -84,29 +84,29 @@ const customFields = {
 ZendeskSupport.callSupport(customFields)
 ```
 
-Bring up ticket history
+#### Bring up ticket history
 ```js
 ZendeskSupport.supportHistory()
 ```
 
 ### Help Center
 
-Show help center
+#### Show help center
 ```js
 ZendeskSupport.showHelpCenter()
 ```
 
-Show categories, e.g., FAQ
+#### Show categories, e.g., FAQ
 ```js
 ZendeskSupport.showCategories(['categoryId'])
 ```
 
-Show sections, e.g., Account Questions
+#### Show sections, e.g., Account Questions
 ```js
 ZendeskSupport.showSections(['sectionId'])
 ```
 
-Show labels, e.g., tacocat
+#### Show labels, e.g., tacocat
 ```js
 ZendeskSupport.showLabels(['tacocat'])
 ```
