@@ -17,19 +17,19 @@ react-native link react-native-zendesk-support
 Add the following line to your Podfile:
 
 ```
-  pod 'react-native-zendesk-support', :path => '../node_modules/react-native-zendesk-support'
+pod 'react-native-zendesk-support', :path => '../node_modules/react-native-zendesk-support'
 ```
 
 Then add this post-install hook:
 
 ```
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        target.build_settings(config.name)['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
-      end
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      target.build_settings(config.name)['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
     end
   end
+end
 ```
 
 ### Configure Android (Must Do)
@@ -48,12 +48,12 @@ Follow the instructions to install the Zendesk Support SDK for [iOS](https://dev
 
 ## Usage
 
-Import the module
+#### Import the module
 ```js
 import ZendeskSupport from 'react-native-zendesk-support';
 ```
 
-Initialize Zendesk
+#### Initialize Zendesk
 ```js
 const config = {
   appId: 'your_app_id',
@@ -64,7 +64,7 @@ ZendeskSupport.initialize(config)
 ```
 ###### Note: You must initialize Zendesk prior to calling setupIdentity. Best place for it would be inside `componentWillMount`
 
-Define an identity
+#### Define an identity
 ```js
 const identity = {
   customerEmail: 'foo@bar.com',
