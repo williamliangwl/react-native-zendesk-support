@@ -16,13 +16,10 @@ react-native link react-native-zendesk-support
 
 Add the following line to your Podfile:
 
+######ios/Podfile
 ```
 pod 'react-native-zendesk-support', :path => '../node_modules/react-native-zendesk-support'
-```
 
-Then add this post-install hook:
-
-```
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
@@ -35,6 +32,7 @@ end
 ### Configure Android (Must Do)
 You need to add the following repository to your `android/app/build.gradle` file. If you do not already have a `repositories` section, add it at the root level of the file right before the `dependencies` section
 
+######android/app/build.gradle
 ```
 repositories {
     maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
@@ -143,11 +141,24 @@ ZendeskSupport.showLabelsWithOptions(['tacocat'], { options })
 * **ARTICLE_LIST_ONLY** – Show floating action button only in list views
 * **OFF** – Hide floating action button on articles and list views
 
-## Known bugs
-* Disappearing help center category headers on android
+### Styling Category Headers (Android Only)
+There is an out of the box issue with Zendesk SDK, as reported by Zendesk support staff themselves, where the expanded category headers use the same color as the top header. Unfortunatly, the default top header color and the background color are very close and you can barely tell the text is even there when the category is expanded.
+
+You're gonna need to update your `android/app/src/main/res/values/styles.xml` to extend from the ZendeskSdkTheme to define your own colors. Below is my own, you can change it to whatever you want your primary color to be.
+
+###### android/app/src/main/res/values/styles.xml
+```xml
+<resources>
+    <style name="AppTheme" parent="ZendeskSdkTheme.Light">
+      <item name="colorPrimary">#FF6240</item>
+    </style>
+</resources>
+```
+
+If you're interested in other things you can theme, or if you want to implement themes differently in Android, you can check out the [Zendesk SDK documention](https://developer.zendesk.com/embeddables/docs/android/customize_the_look)
 
 ## Upcoming Features
 * Authenticate using JWT endpoint
-* Theme support
+* Theme support (iOS only)
 * Show article by id
 * Hiding "Contact us" on iOS from article and list view
