@@ -30,7 +30,7 @@ end
 ```
 
 ### Configure Android (Must Do)
-You need to add the following repository to your `android/app/build.gradle` file. If you do not already have a `repositories` section, add it at the root level of the file right before the `dependencies` section
+You need to add the following repository to your `android/app/build.gradle` file. If you do not already have a `repositories` section, add it at the root level of the file right before the `dependencies` section.
 
 ######android/app/build.gradle
 ```
@@ -126,7 +126,7 @@ ZendeskSupport.showLabelsWithOptions(['tacocat'], { options })
 
 ##### articleVotingEnabled _boolean_
 * **true** _(default)_ – Show voting buttons on articles
-* **false** – Hide voting buttons on articles.
+* **false** – Hide voting buttons on articles
 
 ##### hideContactSupport _boolean_
 * **true** _(default)_ – Shows contact support option in empty results on iOS
@@ -142,7 +142,7 @@ ZendeskSupport.showLabelsWithOptions(['tacocat'], { options })
 * **OFF** – Hide floating action button on articles and list views
 
 ### Styling Category Headers (Android Only)
-There is an out of the box issue with Zendesk SDK, as reported by Zendesk support staff themselves, where the expanded category headers use the same color as the top header. Unfortunatly, the default top header color and the background color are very close and you can barely tell the text is even there when the category is expanded.
+There is an out of the box issue with Zendesk SDK, as reported by Zendesk support staff themselves, where the expanded category headers use the same color as the top header. Unfortunately, the default top header color and the background color are very close and you can barely tell the text is even there when the category is expanded.
 
 You're gonna need to update your `android/app/src/main/res/values/styles.xml` to extend from the ZendeskSdkTheme to define your own colors. Below is my own, you can change it to whatever you want your primary color to be.
 
@@ -155,7 +155,17 @@ You're gonna need to update your `android/app/src/main/res/values/styles.xml` to
 </resources>
 ```
 
-If you're interested in other things you can theme, or if you want to implement themes differently in Android, you can check out the [Zendesk SDK documention](https://developer.zendesk.com/embeddables/docs/android/customize_the_look)
+If you're interested in other things you can theme, or if you want to implement themes differently in Android, you can check out the [Zendesk SDK documention](https://developer.zendesk.com/embeddables/docs/android/customize_the_look).
+
+## Troubleshooting
+#### Help Center has no content
+First off, make sure your content is published. Secondly, you need to make sure to "Enable Guide" in your Zendesk settings so the content will appear. It is described under [Enabling Help Center in setup mode](https://support.zendesk.com/hc/en-us/articles/203664346-Getting-started-with-Guide-Setting-up#ariaid-title5) in the official Zendesk Support documentation.
+
+#### Help Center says "Failed to get categories"
+You need to call `ZendeskSupport.setupIdentity` before calling help center.
+
+#### Zendesk doesn't open for filing/viewing tickets or showing Help Center
+You need to call `ZendeskSupport.initialize` before calling any other methods.
 
 ## Upcoming Features
 * Authenticate using JWT endpoint
