@@ -235,7 +235,7 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
 
     if(activity != null){
         Intent callSupportIntent = new Intent(getReactApplicationContext(), ContactZendeskActivity.class);
-        contactIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        callSupportIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getReactApplicationContext().startActivity(callSupportIntent);
     }
   }
@@ -247,7 +247,7 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
 
     if(activity != null){
         Intent supportHistoryIntent = new Intent(getReactApplicationContext(), RequestActivity.class);
-        contactIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        supportHistoryIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getReactApplicationContext().startActivity(supportHistoryIntent);
     }
   }
