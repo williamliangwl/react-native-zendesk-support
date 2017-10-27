@@ -4,6 +4,9 @@
 
 package com.robertsheao.RNZenDeskSupport;
 
+import android.content.Intent;
+import android.app.Activity;
+
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -228,12 +231,25 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
 
     ZendeskConfig.INSTANCE.setCustomFields(fields);
 
-    ContactZendeskActivity.startActivity(getReactApplicationContext(), null);
+    Activity activity = getCurrentActivity();
+
+    if(activity != null){
+        Intent callSupportIntent = new Intent(getReactApplicationContext(), ContactZendeskActivity.class);
+        contactIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getReactApplicationContext().startActivity(callSupportIntent);
+    }
   }
 
   @ReactMethod
   public void supportHistory() {
-    RequestActivity.startActivity(getReactApplicationContext(), null);
+
+    Activity activity = getCurrentActivity();
+
+    if(activity != null){
+        Intent supportHistoryIntent = new Intent(getReactApplicationContext(), RequestActivity.class);
+        contactIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getReactApplicationContext().startActivity(supportHistoryIntent);
+    }
   }
 
 }
