@@ -102,24 +102,26 @@ RCT_EXPORT_METHOD(showLabels:(NSArray *)labels) {
     [self showLabelsWithOptions:labels options:nil];
 }
 
-RCT_EXPORT_METHOD(setSubject:(NSString*) subject) {
-    [ZDKRequests configure:^(ZDKAccount *account, ZDKRequestCreationConfig *requestCreationConfig) {
-        requestCreationConfig.subject = subject;
-    }];
-}
-
-RCT_EXPORT_METHOD(callSupport:(NSDictionary *)customFields) {
+RCT_EXPORT_METHOD(callSupport:(NSDictionary *)fields) {
+    NSDictionary *customFields = [RCTConvert NSDictionary:fields[@"customFields"]];
+    NSString *subject = [RCTConvert NSString:fields[@"subject"]];
+    NSArray *tags = [RCTConvert NSArray:fields[@"tags"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window=[UIApplication sharedApplication].keyWindow;
         UIViewController *vc = [window rootViewController];
 
-        NSMutableArray *fields = [[NSMutableArray alloc] init];
+        NSMutableArray *customFieldArray = [[NSMutableArray alloc] init];
 
+        [ZDKRequests configure:^(ZDKAccount *account, ZDKRequestCreationConfig *requestCreationConfig) {
+            requestCreationConfig.subject = subject;
+            requestCreationConfig.tags = tags;
+        }];
+        
         for (NSString* key in customFields) {
             id value = [customFields objectForKey:key];
-            [fields addObject: [[ZDKCustomField alloc] initWithFieldId:@(key.intValue) andValue:value]];
+            [customFieldArray addObject: [[ZDKCustomField alloc] initWithFieldId:@(key.intValue) andValue:value]];
         }
-        [ZDKConfig instance].customTicketFields = fields;
+        [ZDKConfig instance].customTicketFields = customFieldArray;
         [ZDKRequests presentRequestCreationWithViewController:vc];
     });
 }
