@@ -74,12 +74,22 @@ ZendeskSupport.setupIdentity(identity)
 
 ### Support Tickets
 
-#### File a ticket
+#### File a ticket Android
 ```js
 const customFields = {
   customFieldId: 'Custom Field Value'
 }
 ZendeskSupport.callSupport(customFields)
+```
+
+#### File a ticket iOS
+```js
+const customFields = {
+  customFieldId: 'Custom Field Value'
+}
+const tags = ['tag1', tag2] //Tags for ticket
+const subject = 'Topic Subject' //Subject for ticket
+ZendeskSupport.callSupport({subject, tags, customFields})
 ```
 
 #### Bring up ticket history
