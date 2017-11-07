@@ -55,9 +55,16 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void setupIdentity(ReadableMap identity) {
     Identity zdIdentity = new AnonymousIdentity.Builder()
-      .withEmailIdentifier(identity.getString("customerEmail"))
-      .withNameIdentifier(identity.getString("customerName"))
-      .build();
+
+    if (identity.getString("customerEmail") != null) {
+      zdIdentity.withEmailIdentifier(identity.getString("customerEmail"));
+    }
+
+    if (identity.getString("customerName") != null) {
+      zdIdentity.withNameIdentifier(identity.getString("customerName"));
+    }
+
+    zdIdentity.build();
 
     ZendeskConfig.INSTANCE.setIdentity(zdIdentity);
   }

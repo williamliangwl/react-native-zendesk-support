@@ -30,8 +30,14 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary *)config){
 RCT_EXPORT_METHOD(setupIdentity:(NSDictionary *)identity){
     dispatch_async(dispatch_get_main_queue(), ^{
         ZDKAnonymousIdentity *zdIdentity = [ZDKAnonymousIdentity new];
-        zdIdentity.email = [RCTConvert NSString:identity[@"customerEmail"]];
-        zdIdentity.name = [RCTConvert NSString:identity[@"customerName"]];
+        NSString *email = [RCTConvert NSString:identity[@"customerEmail"];
+        NSString *name = [RCTConvert NSString:identity[@"customerName"];
+        if (email != nil) {
+            zdIdentity.email = email;
+        }
+        if (name != nil) {
+            zdIdentity.name = name;
+        }
         [ZDKConfig instance].userIdentity = zdIdentity;
 
     });
