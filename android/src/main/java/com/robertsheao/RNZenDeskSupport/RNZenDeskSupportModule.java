@@ -56,11 +56,11 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   public void setupIdentity(ReadableMap identity) {
     AnonymousIdentity.Builder builder = new AnonymousIdentity.Builder();
 
-    if (identity.getString("customerEmail") != null) {
+    if (identity.hasKey("customerEmail")) {
       builder.withEmailIdentifier(identity.getString("customerEmail"));
     }
 
-    if (identity.getString("customerName") != null) {
+    if (identity.hasKey("customerName")) {
       builder.withNameIdentifier(identity.getString("customerName"));
     }
 
