@@ -168,6 +168,9 @@ You need to call `ZendeskSupport.setupIdentity` before calling help center.
 #### Zendesk doesn't open for filing/viewing tickets or showing Help Center
 You need to call `ZendeskSupport.initialize` before calling any other methods.
 
+#### Custom Fields data doesn't appear in Zendesk agent dashboard
+Custom fields need to be set to both "Visible" and "Editable" inside the Zendesk admin console.
+
 ## Upcoming Features
 * Authenticate using JWT endpoint
 * Theme support (iOS only)
