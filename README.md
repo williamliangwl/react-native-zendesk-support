@@ -64,6 +64,7 @@ ZendeskSupport.initialize(config)
 
 #### Define an identity
 ```js
+// passing an identity to setupIdentity() is optional
 const identity = {
   customerEmail: 'foo@bar.com',
   customerName: 'Foo Bar'
