@@ -83,7 +83,7 @@ class SupportActivityBuilder {
     return this;
   }
 
-  private SupportActivityBuilder withArticlesForSectionIds(ReadableArray sectionIds) {
+  SupportActivityBuilder withArticlesForSectionIds(ReadableArray sectionIds) {
     return withArticlesForSectionIds(toLongArray(sectionIds.toArrayList()));
   }
 
