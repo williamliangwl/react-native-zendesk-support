@@ -54,14 +54,19 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setupIdentity(ReadableMap identity) {
-    Identity zdIdentity = new AnonymousIdentity.Builder()
-      .withEmailIdentifier(identity.getString("customerEmail"))
-      .withNameIdentifier(identity.getString("customerName"))
-      .build();
+    public void setupIdentity(ReadableMap identity) {
+      AnonymousIdentity.Builder builder = new AnonymousIdentity.Builder();
 
-    ZendeskConfig.INSTANCE.setIdentity(zdIdentity);
-  }
+      if (identity.hasKey("customerEmail")) {
+        builder.withEmailIdentifier(identity.getString("customerEmail"));
+      }
+
+      if (identity.hasKey("customerName")) {
+        builder.withNameIdentifier(identity.getString("customerName"));
+      }
+
+      ZendeskConfig.INSTANCE.setIdentity(builder.build());
+    }
 
   @ReactMethod
   public void showHelpCenterWithOptions(ReadableMap options) {
