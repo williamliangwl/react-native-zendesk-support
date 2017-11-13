@@ -16,7 +16,7 @@ react-native link react-native-zendesk-support
 
 Add the following line to your Podfile:
 
-######ios/Podfile
+###### ios/Podfile
 ```
 pod 'react-native-zendesk-support', :path => '../node_modules/react-native-zendesk-support'
 
@@ -32,7 +32,7 @@ end
 ### Configure Android (Must Do)
 You need to add the following repository to your `android/app/build.gradle` file. If you do not already have a `repositories` section, add it at the root level of the file right before the `dependencies` section.
 
-######android/app/build.gradle
+###### android/app/build.gradle
 ```
 repositories {
     maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
