@@ -47,10 +47,14 @@ RCT_EXPORT_METHOD(showHelpCenterWithOptions:(NSDictionary *)options) {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window=[UIApplication sharedApplication].keyWindow;
         UIViewController *vc = [window rootViewController];
+        NSString *locale = [RCTConvert NSString:options[@"locale"]] ? [RCTConvert NSString:options[@"locale"]] : @"en-us";
         ZDKHelpCenterOverviewContentModel *helpCenterContentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
-        vc.modalPresentationStyle = UIModalPresentationFormSheet;
-        [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        ZDKHelpCenterProvider *provider = [[ZDKHelpCenterProvider alloc] initWithLocale:locale];
+        [provider getHelpCenterOverviewWithHelpCenterOverviewModel:(ZDKHelpCenterOverviewContentModel *)helpCenterContentModel callback:^(NSArray<ZDKHelpCenterCategoryViewModel *> *categories, NSError *error) {
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        }];
     });
 }
 
@@ -58,12 +62,16 @@ RCT_EXPORT_METHOD(showCategoriesWithOptions:(NSArray *)categories options:(NSDic
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window=[UIApplication sharedApplication].keyWindow;
         UIViewController *vc = [window rootViewController];
+        NSString *locale = [RCTConvert NSString:options[@"locale"]] ? [RCTConvert NSString:options[@"locale"]] : @"en-us";
         ZDKHelpCenterOverviewContentModel *helpCenterContentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupTypeCategory;
         helpCenterContentModel.groupIds = categories;
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
-        vc.modalPresentationStyle = UIModalPresentationFormSheet;
-        [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        ZDKHelpCenterProvider *provider = [[ZDKHelpCenterProvider alloc] initWithLocale:locale];
+        [provider getHelpCenterOverviewWithHelpCenterOverviewModel:(ZDKHelpCenterOverviewContentModel *)helpCenterContentModel callback:^(NSArray<ZDKHelpCenterCategoryViewModel *> *categories, NSError *error) {
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        }];
     });
 }
 
@@ -71,12 +79,16 @@ RCT_EXPORT_METHOD(showSectionsWithOptions:(NSArray *)sections options:(NSDiction
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window=[UIApplication sharedApplication].keyWindow;
         UIViewController *vc = [window rootViewController];
+        NSString *locale = [RCTConvert NSString:options[@"locale"]] ? [RCTConvert NSString:options[@"locale"]] : @"en-us";
         ZDKHelpCenterOverviewContentModel *helpCenterContentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
         helpCenterContentModel.groupIds = sections;
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
-        vc.modalPresentationStyle = UIModalPresentationFormSheet;
-        [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        ZDKHelpCenterProvider *provider = [[ZDKHelpCenterProvider alloc] initWithLocale:locale];
+        [provider getHelpCenterOverviewWithHelpCenterOverviewModel:(ZDKHelpCenterOverviewContentModel *)helpCenterContentModel callback:^(NSArray<ZDKHelpCenterCategoryViewModel *> *categories, NSError *error) {
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        }];
     });
 }
 
@@ -84,11 +96,15 @@ RCT_EXPORT_METHOD(showLabelsWithOptions:(NSArray *)labels options:(NSDictionary 
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window=[UIApplication sharedApplication].keyWindow;
         UIViewController *vc = [window rootViewController];
+        NSString *locale = [RCTConvert NSString:options[@"locale"]] ? [RCTConvert NSString:options[@"locale"]] : @"en-us";
         ZDKHelpCenterOverviewContentModel *helpCenterContentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
         helpCenterContentModel.labels = labels;
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
-        vc.modalPresentationStyle = UIModalPresentationFormSheet;
-        [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        ZDKHelpCenterProvider *provider = [[ZDKHelpCenterProvider alloc] initWithLocale:locale];
+        [provider getHelpCenterOverviewWithHelpCenterOverviewModel:(ZDKHelpCenterOverviewContentModel *)helpCenterContentModel callback:^(NSArray<ZDKHelpCenterCategoryViewModel *> *categories, NSError *error) {
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
+        }];
     });
 }
 
