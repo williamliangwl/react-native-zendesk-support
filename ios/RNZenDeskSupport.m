@@ -49,6 +49,9 @@ RCT_EXPORT_METHOD(showHelpCenterWithOptions:(NSDictionary *)options) {
         UIViewController *vc = [window rootViewController];
         ZDKHelpCenterOverviewContentModel *helpCenterContentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
+        if (helpCenterContentModel.hideContactSupport) {
+            [ZDKHelpCenter setNavBarConversationsUIType:ZDKNavBarConversationsUITypeNone];
+        }
         vc.modalPresentationStyle = UIModalPresentationFormSheet;
         [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
     });
@@ -62,6 +65,9 @@ RCT_EXPORT_METHOD(showCategoriesWithOptions:(NSArray *)categories options:(NSDic
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupTypeCategory;
         helpCenterContentModel.groupIds = categories;
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
+        if (helpCenterContentModel.hideContactSupport) {
+            [ZDKHelpCenter setNavBarConversationsUIType:ZDKNavBarConversationsUITypeNone];
+        }
         vc.modalPresentationStyle = UIModalPresentationFormSheet;
         [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
     });
@@ -75,6 +81,9 @@ RCT_EXPORT_METHOD(showSectionsWithOptions:(NSArray *)sections options:(NSDiction
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
         helpCenterContentModel.groupIds = sections;
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
+        if (helpCenterContentModel.hideContactSupport) {
+            [ZDKHelpCenter setNavBarConversationsUIType:ZDKNavBarConversationsUITypeNone];
+        }
         vc.modalPresentationStyle = UIModalPresentationFormSheet;
         [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
     });
@@ -87,6 +96,9 @@ RCT_EXPORT_METHOD(showLabelsWithOptions:(NSArray *)labels options:(NSDictionary 
         ZDKHelpCenterOverviewContentModel *helpCenterContentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
         helpCenterContentModel.labels = labels;
         helpCenterContentModel.hideContactSupport = [RCTConvert BOOL:options[@"hideContactSupport"]];
+        if (helpCenterContentModel.hideContactSupport) {
+            [ZDKHelpCenter setNavBarConversationsUIType:ZDKNavBarConversationsUITypeNone];
+        }
         vc.modalPresentationStyle = UIModalPresentationFormSheet;
         [ZDKHelpCenter presentHelpCenterOverview:vc withContentModel:helpCenterContentModel];
     });
