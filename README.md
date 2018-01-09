@@ -222,4 +222,3 @@ Custom fields need to be set to both "Visible" and "Editable" inside the Zendesk
 * Authenticate using JWT endpoint
 * Theme support (iOS only)
 * Show article by id
-* Hiding "Contact us" on iOS from article and list view
