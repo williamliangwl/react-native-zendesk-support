@@ -29,6 +29,34 @@ post_install do |installer|
 end
 ```
 
+### Manually Linking (iOS)
+
+If using `react-native link` doesn't work, you can try manually linking. Sometimes apps created with `create-react-native-app` that haven't been ejected can have problems linking properly.
+
+1. Open your project in XCode, right click on `Libraries` and click `Add Files to "Your Project Name"`. Look under node_modules/react-native-zendesk-support` and add `RNZenDeskSupport.xcodeproj`
+2. Add `libRNZenDeskSupport.a` from `Libraries/RNZenDeskSupport.xcodeproj/Products` to `Build Phases -> Link Binary With Libraries`
+3. Verify `$(SRCROOT)/../../react-native/React` is included in `Header Search Paths` under `Build Settings` for the `Libraries/RNZenDeskSupport.xcodeproj` library you just added. Mark it as `recursive`
+
+
+### Manually Linking (Android)
+
+###### android/app/build.gradle
+```diff
+dependencies {
+    ...
+    compile "com.facebook.react:react-native:+"  // From node_modules
++   compile project(':react-native-zendesk-support')
+}
+```
+
+###### android/settings.gradle
+```diff
+...
+include ':app'
++ include ':react-native-zendesk-support'
++ project(':react-native-zendesk-support').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-zendesk-support/android')
+```
+
 ### Configure Android (Must Do)
 You need to add the following repository to your `android/app/build.gradle` file. If you do not already have a `repositories` section, add it at the root level of the file right before the `dependencies` section.
 
@@ -37,6 +65,25 @@ You need to add the following repository to your `android/app/build.gradle` file
 repositories {
     maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
 }
+```
+
+###### MainApplication.java
+```diff
++ import com.robertsheao.RNZenDeskSupport.RNZenDeskSupport;
+
+  public class MainApplication extends Application implements ReactApplication {
+    //......
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
++         new RNZenDeskSupport(),
+          new MainReactPackage()
+      );
+    }
+
+    ......
+  }
 ```
 
 ### Configure iOS (Must Do)
@@ -130,8 +177,8 @@ ZendeskSupport.showLabelsWithOptions(['tacocat'], { options })
 * **false** – Hide voting buttons on articles
 
 ##### hideContactSupport _boolean_
-* **true** _(default)_ – Shows contact support option in empty results on iOS
-* **false** – Hides contact support option in empty results on iOS
+* **true** _(default)_ – Shows contact support option in empty results and navigation bar on iOS
+* **false** – Hides contact support option in empty results and navigation bar on iOS
 
 ##### showConversationsMenuButton _boolean_
 * **true** _(default)_ – Shows the right menu on Android which shows tickets
@@ -175,4 +222,3 @@ Custom fields need to be set to both "Visible" and "Editable" inside the Zendesk
 * Authenticate using JWT endpoint
 * Theme support (iOS only)
 * Show article by id
-* Hiding "Contact us" on iOS from article and list view
