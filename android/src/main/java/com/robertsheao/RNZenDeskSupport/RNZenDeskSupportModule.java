@@ -21,6 +21,7 @@ import com.zendesk.sdk.support.SupportActivity;
 import com.zendesk.sdk.support.ContactUsButtonVisibility;
 import com.zendesk.sdk.model.access.AnonymousIdentity;
 import com.zendesk.sdk.model.access.Identity;
+import com.zendesk.sdk.model.access.JwtIdentity;
 import com.zendesk.sdk.model.request.CustomField;
 import com.zendesk.sdk.network.impl.ZendeskConfig;
 
@@ -54,19 +55,25 @@ public class RNZenDeskSupportModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-    public void setupIdentity(ReadableMap identity) {
-      AnonymousIdentity.Builder builder = new AnonymousIdentity.Builder();
+  public void setupIdentity(ReadableMap identity) {
+    AnonymousIdentity.Builder builder = new AnonymousIdentity.Builder();
 
-      if (identity != null && identity.hasKey("customerEmail")) {
-        builder.withEmailIdentifier(identity.getString("customerEmail"));
-      }
-
-      if (identity != null && identity.hasKey("customerName")) {
-        builder.withNameIdentifier(identity.getString("customerName"));
-      }
-
-      ZendeskConfig.INSTANCE.setIdentity(builder.build());
+    if (identity != null && identity.hasKey("customerEmail")) {
+      builder.withEmailIdentifier(identity.getString("customerEmail"));
     }
+
+    if (identity != null && identity.hasKey("customerName")) {
+      builder.withNameIdentifier(identity.getString("customerName"));
+    }
+
+    ZendeskConfig.INSTANCE.setIdentity(builder.build());
+  }
+
+  @ReactMethod
+  public void setupJwtIdentity(String jwtToken) {
+    Identity jwtUserIdentity = new JwtIdentity(jwtToken);
+    ZendeskConfig.INSTANCE.setIdentity(jwtUserIdentity);
+  }
 
   @ReactMethod
   public void showHelpCenterWithOptions(ReadableMap options) {
