@@ -43,6 +43,13 @@ RCT_EXPORT_METHOD(setupIdentity:(NSDictionary *)identity){
     });
 }
 
+RCT_EXPORT_METHOD(setupJwtIdentity:(NSString *)jwtToken){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ZDKJwtIdentity * jwtUserIdentity = [[ZDKJwtIdentity alloc] initWithJwtUserIdentifier:jwtToken];
+        [ZDKConfig instance].userIdentity = jwtUserIdentity;
+    });
+}
+
 RCT_EXPORT_METHOD(showHelpCenterWithOptions:(NSDictionary *)options) {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *window=[UIApplication sharedApplication].keyWindow;
